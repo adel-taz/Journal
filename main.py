@@ -3,22 +3,24 @@
 # If the user enters several texts in a day, these texts are appended at the end of each other.
 
 from datetime import date
+from datetime import datetime
 import os.path
 import tkinter as tk
 
 #make text file with the date as the name
 def makeFile(text):
     fileName = str(date.today())+".txt"
+    time = datetime.now().strftime("%H:%M:%S")
     path = "/Users/adeltazhibi/Desktop/Journal";
     filePath = os.path.join(path,fileName)
     if os.path.exists(filePath):
         with open(filePath, 'a') as f:
             f.write("\n\n")
-            f.write(text)
+            f.write(time + ": "+text)
             lbl.config(text="Added to the already made file!")
     else:
         with open(filePath, 'w') as f:
-            f.write(text)
+            f.write(time + ": "+text)
             lbl.config(text="File created!")
 
 
